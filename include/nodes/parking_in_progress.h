@@ -1,12 +1,13 @@
 #ifndef NODE_PARKING_IN_PROGRESS
 #define NODE_PARKING_IN_PROGRESS
 
-#include "actionNode.h"
+#include "action_node.h"
 
-class ParkingInProgress : public BTAction {
+class ParkingInProgress : public BT::ActionNode {
 public:
     ParkingInProgress(std::string name);
-    void execute_callback(const behavior_tree_core::BTGoalConstPtr& ptr) override;
+    void WaitForTick();
+//    void execute_callback(const behavior_tree_core::BTGoalConstPtr& ptr) override;
     void Halt() override;
     int DrawType() override;
     BT::ReturnStatus Tick() override;

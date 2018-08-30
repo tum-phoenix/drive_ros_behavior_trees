@@ -7,18 +7,16 @@
     Child nodes: -/-
 */
 
+#include <ros/ros.h>
 #include <nodes/initial_drive.h>
 #include <string>
 
-InitialDrive::InitialDrive(std::string name):
-  BTAction(name)
+NODE_INITIAL_DRIVE::InitialDrive::InitialDrive(std::string name):
+  BT::ActionNode(name)
 {
-
+  thread_ = std::thread(&InitialDrive::WaitForTick, this);
 }
 
-InitialDrive::~InitialDrive() {
-
-}
 
 void InitialDrive::start() {
     started = true;
@@ -44,6 +42,7 @@ void InitialDrive::WaitForTick()
   /*HERE THE CODE TO EXECUTE FOR THE ACTION.
    wHEN THE ACTION HAS FINISHED CORRECLTY, CALL set_status(BT::SUCCESS)
   IF THE ACTION FAILS, CALL set_status(BT::FAILURE)*/
+
         }
     }
 }
@@ -62,7 +61,8 @@ BT::ReturnStatus InitialDrive::Tick() {
 int InitialDrive::DrawType() {
   return BT::ACTION;
 }
-
+/*
 void InitialDrive::execute_callback(const behavior_tree_core::BTGoalConstPtr& ptr) {
 
 }
+*/

@@ -7,18 +7,18 @@
     Child nodes: -/-
 */
 
-#include <parking_in_progress.h>
+#include <ros/ros.h>
+#include <nodes/parking_in_progress.h>
 #include <string>
 
-NODE_PARKING_IN_PROGRESS::ParkingInProgress(std::string name) : ActionNode::ActionNode(name)
+NODE_PARKING_IN_PROGRESS::ParkingInProgress::ParkingInProgress(std::string name) : ActionNode::ActionNode(name)
 {
-    thread_ = std::thread(&ActionTestNode::WaitForTick, this)
+    thread_ = std::thread(&ParkingInProgress::WaitForTick, this);
 }
 
-NODE_PARKING_IN_PROGRESS::ParkingInProgress::~CONSTRUCTOR() {}
 
 
-void NODE_PARKING_IN_PROGRESS::ParkingInProgress::WaitForTick()
+void ParkingInProgress::WaitForTick()
 {
     while (true)
     {
@@ -44,21 +44,22 @@ void NODE_PARKING_IN_PROGRESS::ParkingInProgress::WaitForTick()
     }
 }
 
-void NODE_PARKING_IN_PROGRESS::ParkingInProgress::Halt()
+void ParkingInProgress::Halt()
 {
     /*HERE THE CODE TO PERFORM WHEN THE ACTION IS HALTED*/
     set_status(BT::HALTED);
     DEBUG_STDOUT("HALTED state set!");
 }
 
-BT::ReturnStatus NODE_PARKING_IN_PROGRESS::ParkingInProgress::Tick() {
+BT::ReturnStatus ParkingInProgress::Tick() {
   return BT::EXIT;
 }
 
-int NODE_PARKING_IN_PROGRESS::ParkingInProgress::DrawType() {
+int ParkingInProgress::DrawType() {
   return BT::ACTION;
 }
-
+/*
 void NODE_PARKING_IN_PROGRESS::ParkingInProgress::execute_callback(const behavior_tree_core::BTGoalConstPtr& ptr) {
 
 }
+*/

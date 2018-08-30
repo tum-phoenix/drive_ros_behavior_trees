@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(behavior_trees)
+project(drive_ros_behavior_trees)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
 add_compile_options(-std=c++11)
@@ -205,6 +205,11 @@ include_directories(
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
 
-
-add_executable(BehaviorTree src/tree/Tree.cpp)
+add_executable(BehaviorTree src/tree/Tree.cpp
+  src/nodes/initial_drive.cpp
+  src/nodes/parking_getready.cpp
+  src/nodes/parking_in_progress.cpp
+  src/nodes/parking_reverse.cpp
+  src/nodes/parking_spot_search.cpp
+  src/nodes/drive.cpp)
 target_link_libraries(BehaviorTree ${catkin_LIBRARIES})

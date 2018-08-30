@@ -7,18 +7,17 @@
     Child nodes: -/-
 */
 
-#include <parking_spot_search.h>
+#include <nodes/parking_spot_search.h>
 #include <string>
 
-NODE_PARKING_SPOT_SEARCH::ParkingSpotSearch(std::string name) : ActionNode::ActionNode(name)
+NODE_PARKING_SPOT_SEARCH::ParkingSpotSearch::ParkingSpotSearch(std::string name) : ActionNode::ActionNode(name)
 {
-    thread_ = std::thread(&ActionTestNode::WaitForTick, this)
+    thread_ = std::thread(&ParkingSpotSearch::WaitForTick, this);
 }
 
-NODE_PARKING_SPOT_SEARCH::ParkingSpotSearch::~CONSTRUCTOR() {}
 
 
-void NODE_PARKING_SPOT_SEARCH::ParkingSpotSearch::WaitForTick()
+void ParkingSpotSearch::WaitForTick()
 {
     while (true)
     {
@@ -41,21 +40,22 @@ void NODE_PARKING_SPOT_SEARCH::ParkingSpotSearch::WaitForTick()
     }
 }
 
-void NODE_PARKING_SPOT_SEARCH::ParkingSpotSearch::Halt()
+void ParkingSpotSearch::Halt()
 {
     /*HERE THE CODE TO PERFORM WHEN THE ACTION IS HALTED*/
     set_status(BT::HALTED);
     DEBUG_STDOUT("HALTED state set!");
 }
 
-BT::ReturnStatus NODE_PARKING_SPOT_SEARCH::ParkingSpotSearch::Tick() {
+BT::ReturnStatus ParkingSpotSearch::Tick() {
   return BT::EXIT;
 }
 
-int NODE_PARKING_SPOT_SEARCH::ParkingSpotSearch::DrawType() {
+int ParkingSpotSearch::DrawType() {
   return BT::ACTION;
 }
-
+/*
 void NODE_PARKING_SPOT_SEARCH::ParkingSpotSearch::execute_callback(const behavior_tree_core::BTGoalConstPtr& ptr) {
 
 }
+*/

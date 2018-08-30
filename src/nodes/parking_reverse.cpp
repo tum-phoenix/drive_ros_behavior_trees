@@ -7,18 +7,16 @@
     Child nodes: -/-
 */
 
-#include <parking_reverse.h>
+#include <nodes/parking_reverse.h>
 #include <string>
 
-NODE_PARKING_REVERSE::ParkingReverse(std::string name) : ActionNode::ActionNode(name)
+NODE_PARKING_REVERSE::ParkingReverse::ParkingReverse(std::string name) : ActionNode::ActionNode(name)
 {
-    thread_ = std::thread(&ActionTestNode::WaitForTick, this)
+    thread_ = std::thread(&ParkingReverse::WaitForTick, this);
 }
 
-NODE_PARKING_REVERSE::ParkingReverse::~CONSTRUCTOR() {}
 
-
-void NODE_PARKING_REVERSE::ParkingReverse::WaitForTick()
+void ParkingReverse::WaitForTick()
 {
     while (true)
     {
@@ -41,21 +39,22 @@ void NODE_PARKING_REVERSE::ParkingReverse::WaitForTick()
     }
 }
 
-void NODE_PARKING_REVERSE::ParkingReverse::Halt()
+void ParkingReverse::Halt()
 {
     /*HERE THE CODE TO PERFORM WHEN THE ACTION IS HALTED*/
     set_status(BT::HALTED);
     DEBUG_STDOUT("HALTED state set!");
 }
 
-BT::ReturnStatus NODE_PARKING_REVERSE::ParkingReverse::Tick() {
+BT::ReturnStatus ParkingReverse::Tick() {
   return BT::EXIT;
 }
 
-int NODE_PARKING_REVERSE::ParkingReverse::DrawType() {
+int ParkingReverse::DrawType() {
   return BT::ACTION;
 }
-
+/*
 void NODE_PARKING_REVERSE::ParkingReverse::execute_callback(const behavior_tree_core::BTGoalConstPtr& ptr) {
 
 }
+*/

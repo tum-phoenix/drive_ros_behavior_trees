@@ -7,18 +7,17 @@
     Child nodes: -/-
 */
 
-#include <parking_getready.h>
+#include <nodes/parking_getready.h>
 #include <string>
 
-NODE_PARKING_GETREADY::ParkingGetready(std::string name) : ActionNode::ActionNode(name)
+NODE_PARKING_GETREADY::ParkingGetready::ParkingGetready(std::string name) : BT::ActionNode(name)
 {
-    thread_ = std::thread(&ActionTestNode::WaitForTick, this)
+    thread_ = std::thread(&ParkingGetready::WaitForTick, this);
 }
 
-NODE_PARKING_GETREADY::ParkingGetready::~CONSTRUCTOR() {}
 
 
-void NODE_PARKING_GETREADY::ParkingGetready::WaitForTick()
+void ParkingGetready::WaitForTick()
 {
     while (true)
     {
@@ -41,21 +40,22 @@ void NODE_PARKING_GETREADY::ParkingGetready::WaitForTick()
     }
 }
 
-void NODE_PARKING_Getready::ParkingGetready::Halt()
+void ParkingGetready::Halt()
 {
     /*HERE THE CODE TO PERFORM WHEN THE ACTION IS HALTED*/
     set_status(BT::HALTED);
     DEBUG_STDOUT("HALTED state set!");
 }
 
-BT::ReturnStatus NODE_PARKING_GETREADY::ParkingGetready::Tick() {
+BT::ReturnStatus ParkingGetready::Tick() {
   return BT::EXIT;
 }
 
-int NODE_PARKING_GETREADY::ParkingGetready::DrawType() {
+int ParkingGetready::DrawType() {
   return BT::ACTION;
 }
-
+/*
 void NODE_PARKING_GETREADY::ParkingGetready::execute_callback(const behavior_tree_core::BTGoalConstPtr& ptr) {
 
 }
+*/

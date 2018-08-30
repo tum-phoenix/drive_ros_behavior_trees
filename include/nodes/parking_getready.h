@@ -1,12 +1,13 @@
 #ifndef NODE_PARKING_GETREADY
 #define NODE_PARKING_GETREADY
 
-#include "actionNode.h"
+#include "action_node.h"
 
-class ParkingGetready : public BTAction {
+class ParkingGetready : public BT::ActionNode {
 public:
     ParkingGetready(std::string name);
-    void execute_callback(const behavior_tree_core::BTGoalConstPtr& ptr) override;
+    void WaitForTick();
+//    void execute_callback(const behavior_tree_core::BTGoalConstPtr& ptr) override;
     void Halt() override;
     int DrawType() override;
     BT::ReturnStatus Tick() override;
