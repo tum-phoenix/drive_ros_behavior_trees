@@ -1,0 +1,3 @@
+<launch>
+    <node name="behavior_tree" pkg="behaviorTree" type="listener">
+</launch>
