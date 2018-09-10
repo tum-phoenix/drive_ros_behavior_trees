@@ -4,7 +4,6 @@
     Activation: On system startup
     Termination: Crossing of chequered start line
     Contains: Driving straight forward, waiting for start line
-    Child nodes: -/-
 */
 
 #include <ros/ros.h>
@@ -15,12 +14,6 @@ NODE_INITIAL_DRIVE::InitialDrive::InitialDrive(std::string name):
   BT::ActionNode(name)
 {
   thread_ = std::thread(&InitialDrive::WaitForTick, this);
-}
-
-
-void InitialDrive::start() {
-    started = true;
-    //Notify other controls: (adjust wheels to straight forward), start driving, wait for chequered line
 }
 
 void InitialDrive::WaitForTick()
@@ -36,13 +29,12 @@ void InitialDrive::WaitForTick()
         // Running state
         set_status(BT::RUNNING);
         // Perform action...
-
         while (get_status() != BT::HALTED)
         {
   /*HERE THE CODE TO EXECUTE FOR THE ACTION.
    wHEN THE ACTION HAS FINISHED CORRECLTY, CALL set_status(BT::SUCCESS)
   IF THE ACTION FAILS, CALL set_status(BT::FAILURE)*/
-
+  
         }
     }
 }
@@ -53,16 +45,3 @@ void InitialDrive::Halt()
     set_status(BT::HALTED);
     DEBUG_STDOUT("HALTED state set!");
 }
-
-BT::ReturnStatus InitialDrive::Tick() {
-  return BT::EXIT;
-}
-
-int InitialDrive::DrawType() {
-  return BT::ACTION;
-}
-/*
-void InitialDrive::execute_callback(const behavior_tree_core::BTGoalConstPtr& ptr) {
-
-}
-*/

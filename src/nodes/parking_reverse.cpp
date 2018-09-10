@@ -4,7 +4,6 @@
     Activation: Parking finished successfully
     Termination: Car is on track again, after parking has been performed
     Contains: Reversing the taken steps to get back on track
-    Child nodes: -/-
 */
 
 #include <nodes/parking_reverse.h>
@@ -45,16 +44,3 @@ void ParkingReverse::Halt()
     set_status(BT::HALTED);
     DEBUG_STDOUT("HALTED state set!");
 }
-
-BT::ReturnStatus ParkingReverse::Tick() {
-  return BT::EXIT;
-}
-
-int ParkingReverse::DrawType() {
-  return BT::ACTION;
-}
-/*
-void NODE_PARKING_REVERSE::ParkingReverse::execute_callback(const behavior_tree_core::BTGoalConstPtr& ptr) {
-
-}
-*/

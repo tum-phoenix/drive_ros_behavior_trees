@@ -211,5 +211,17 @@ add_executable(BehaviorTree src/tree/Tree.cpp
   src/nodes/parking_in_progress.cpp
   src/nodes/parking_reverse.cpp
   src/nodes/parking_spot_search.cpp
-  src/nodes/drive.cpp)
+  src/nodes/drive.cpp
+  src/nodes/cross_intersection.cpp
+
+  src/nodes/switch_to_left_lane.cpp
+  src/nodes/switch_to_right_lane.cpp
+  src/nodes/pass_object.cpp
+  src/nodes/pass_barred_area.cpp
+  src/nodes/following_object.cpp
+  src/nodes/crosswalk_break.cpp
+  src/nodes/crosswalk_wait.cpp
+  src/nodes/intersection_break.cpp
+  src/nodes/intersection_wait.cpp
+  src/nodes/intersection_crossing.cpp)
 target_link_libraries(BehaviorTree ${catkin_LIBRARIES})

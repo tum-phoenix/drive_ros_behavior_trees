@@ -3,18 +3,13 @@
 
 #include "action_node.h"
 
+extern bool RCenabled;
+
 class InitialDrive : public BT::ActionNode {
-private:
-    bool started;
 public:
     InitialDrive(std::string name);
-   ~InitialDrive();
-    void start();
     void WaitForTick();
-//    void execute_callback(const behavior_tree_core::BTGoalConstPtr& ptr) override;
     void Halt() override;
-    int DrawType() override;
-    BT::ReturnStatus Tick() override;
 };
 
 #endif

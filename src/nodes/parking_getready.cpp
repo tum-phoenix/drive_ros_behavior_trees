@@ -4,7 +4,6 @@
     Activation: Parking spot found
     Termination: Car is ready to apply parking technique
     Contains: Stopping, maybe repositioning
-    Child nodes: -/-
 */
 
 #include <nodes/parking_getready.h>
@@ -46,16 +45,3 @@ void ParkingGetready::Halt()
     set_status(BT::HALTED);
     DEBUG_STDOUT("HALTED state set!");
 }
-
-BT::ReturnStatus ParkingGetready::Tick() {
-  return BT::EXIT;
-}
-
-int ParkingGetready::DrawType() {
-  return BT::ACTION;
-}
-/*
-void NODE_PARKING_GETREADY::ParkingGetready::execute_callback(const behavior_tree_core::BTGoalConstPtr& ptr) {
-
-}
-*/

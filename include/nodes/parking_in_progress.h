@@ -3,14 +3,13 @@
 
 #include "action_node.h"
 
+extern bool RCenabled;
+
 class ParkingInProgress : public BT::ActionNode {
 public:
     ParkingInProgress(std::string name);
     void WaitForTick();
-//    void execute_callback(const behavior_tree_core::BTGoalConstPtr& ptr) override;
     void Halt() override;
-    int DrawType() override;
-    BT::ReturnStatus Tick() override;
 };
 
 #endif

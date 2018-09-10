@@ -1,28 +1,22 @@
 /*
     --- Node description ---
-    Used in: Parking
-    Activation: (Parking completed) or (just left intersection)
-    Termination: (Crossing of chequered start line, only if the car needs to park) or (entering intersection)
-    Contains: Following the track
-    Child nodes: -/-
+    Used in: Obstacles, Parking
+    Activation: Entering intersection
+    Termination: Left and right lane marking immediately upfront (->leaving intersection)
+    Contains: Driving straight forward
 */
 
-#include <nodes/drive.h>
+#include <ros/ros.h>
+#include <nodes/cross_intersection.h>
 #include <string>
 
-NODE_DRIVE::Drive::Drive(std::string name):
+NODE_CROSS_INTERSECTION::CrossIntersection::CrossIntersection(std::string name):
   BT::ActionNode(name)
 {
-  thread_ = std::thread(&Drive::WaitForTick, this);
+  thread_ = std::thread(&CrossIntersection::WaitForTick, this);
 }
 
-
-void Drive::start() {
-    started = true;
-    //Notify other controls: (adjust wheels to straight forward), start driving, wait for chequered line
-}
-
-void Drive::WaitForTick()
+void CrossIntersection::WaitForTick()
 {
     while (true)
     {
@@ -41,11 +35,12 @@ void Drive::WaitForTick()
   /*HERE THE CODE TO EXECUTE FOR THE ACTION.
    wHEN THE ACTION HAS FINISHED CORRECLTY, CALL set_status(BT::SUCCESS)
   IF THE ACTION FAILS, CALL set_status(BT::FAILURE)*/
+
         }
     }
 }
 
-void Drive::Halt()
+void CrossIntersection::Halt()
 {
     /*HERE THE CODE TO PERFORM WHEN THE ACTION IS HALTED*/
     set_status(BT::HALTED);

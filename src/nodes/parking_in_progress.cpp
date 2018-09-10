@@ -4,7 +4,6 @@
     Activation: Car is ready to start parking
     Termination: Parking failed / Car is in parking spot according to selected technique
     Contains: Applying the predefined parking technique (parallel or perpendicular -> specific instructions)
-    Child nodes: -/-
 */
 
 #include <ros/ros.h>
@@ -50,16 +49,3 @@ void ParkingInProgress::Halt()
     set_status(BT::HALTED);
     DEBUG_STDOUT("HALTED state set!");
 }
-
-BT::ReturnStatus ParkingInProgress::Tick() {
-  return BT::EXIT;
-}
-
-int ParkingInProgress::DrawType() {
-  return BT::ACTION;
-}
-/*
-void NODE_PARKING_IN_PROGRESS::ParkingInProgress::execute_callback(const behavior_tree_core::BTGoalConstPtr& ptr) {
-
-}
-*/

@@ -1,28 +1,22 @@
 /*
     --- Node description ---
-    Used in: Parking
-    Activation: (Parking completed) or (just left intersection)
-    Termination: (Crossing of chequered start line, only if the car needs to park) or (entering intersection)
-    Contains: Following the track
-    Child nodes: -/-
+    Used in: Obstacles
+    Activation: Intersection detected and car velocity is 0
+    Termination: Minimum waiting time is over or another car crossed the intersection
+    Contains: Waiting.
 */
 
-#include <nodes/drive.h>
+#include <ros/ros.h>
+#include <nodes/intersection_wait.h>
 #include <string>
 
-NODE_DRIVE::Drive::Drive(std::string name):
+NODE_INTERSECTION_WAIT::IntersectionWait::IntersectionWait(std::string name):
   BT::ActionNode(name)
 {
-  thread_ = std::thread(&Drive::WaitForTick, this);
+  thread_ = std::thread(&IntersectionWait::WaitForTick, this);
 }
 
-
-void Drive::start() {
-    started = true;
-    //Notify other controls: (adjust wheels to straight forward), start driving, wait for chequered line
-}
-
-void Drive::WaitForTick()
+void IntersectionWait::WaitForTick()
 {
     while (true)
     {
@@ -35,17 +29,17 @@ void Drive::WaitForTick()
         // Running state
         set_status(BT::RUNNING);
         // Perform action...
-
         while (get_status() != BT::HALTED)
         {
   /*HERE THE CODE TO EXECUTE FOR THE ACTION.
    wHEN THE ACTION HAS FINISHED CORRECLTY, CALL set_status(BT::SUCCESS)
   IF THE ACTION FAILS, CALL set_status(BT::FAILURE)*/
+
         }
     }
 }
 
-void Drive::Halt()
+void IntersectionWait::Halt()
 {
     /*HERE THE CODE TO PERFORM WHEN THE ACTION IS HALTED*/
     set_status(BT::HALTED);

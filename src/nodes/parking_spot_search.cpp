@@ -4,7 +4,6 @@
     Activation: Start of parking process
     Termination: Parking spot found
     Contains: Following the track, lookout for parking spot
-    Child nodes: -/-
 */
 
 #include <nodes/parking_spot_search.h>
@@ -46,16 +45,3 @@ void ParkingSpotSearch::Halt()
     set_status(BT::HALTED);
     DEBUG_STDOUT("HALTED state set!");
 }
-
-BT::ReturnStatus ParkingSpotSearch::Tick() {
-  return BT::EXIT;
-}
-
-int ParkingSpotSearch::DrawType() {
-  return BT::ACTION;
-}
-/*
-void NODE_PARKING_SPOT_SEARCH::ParkingSpotSearch::execute_callback(const behavior_tree_core::BTGoalConstPtr& ptr) {
-
-}
-*/

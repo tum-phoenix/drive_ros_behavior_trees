@@ -1,3 +1,6 @@
 <launch>
-    <node name="behavior_tree" pkg="behaviorTree" type="listener">
+    <node name="behavior_tree" pkg="drive_ros_behavior_trees" type="BehaviorTree" output="screen">
+      <!-- possible modes: "PARKING", "OBSTACLES"-->
+      <param name="mode" value="OBSTACLES"/>
+    </node>
 </launch>

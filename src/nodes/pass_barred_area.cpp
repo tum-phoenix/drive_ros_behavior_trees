@@ -1,28 +1,22 @@
 /*
     --- Node description ---
-    Used in: Parking
-    Activation: (Parking completed) or (just left intersection)
-    Termination: (Crossing of chequered start line, only if the car needs to park) or (entering intersection)
-    Contains: Following the track
-    Child nodes: -/-
+    Used in: Obstacles
+    Activation: Barred area detected and car is on left lane
+    Termination: barred area isn't detected any more
+    Contains: Driving on the left lane.
 */
 
-#include <nodes/drive.h>
+#include <ros/ros.h>
+#include <nodes/pass_barred_area.h>
 #include <string>
 
-NODE_DRIVE::Drive::Drive(std::string name):
+NODE_PASS_BARRED_AREA::PassBarredArea::PassBarredArea(std::string name):
   BT::ActionNode(name)
 {
-  thread_ = std::thread(&Drive::WaitForTick, this);
+  thread_ = std::thread(&PassBarredArea::WaitForTick, this);
 }
 
-
-void Drive::start() {
-    started = true;
-    //Notify other controls: (adjust wheels to straight forward), start driving, wait for chequered line
-}
-
-void Drive::WaitForTick()
+void PassBarredArea::WaitForTick()
 {
     while (true)
     {
@@ -35,17 +29,17 @@ void Drive::WaitForTick()
         // Running state
         set_status(BT::RUNNING);
         // Perform action...
-
         while (get_status() != BT::HALTED)
         {
   /*HERE THE CODE TO EXECUTE FOR THE ACTION.
    wHEN THE ACTION HAS FINISHED CORRECLTY, CALL set_status(BT::SUCCESS)
   IF THE ACTION FAILS, CALL set_status(BT::FAILURE)*/
+
         }
     }
 }
 
-void Drive::Halt()
+void PassBarredArea::Halt()
 {
     /*HERE THE CODE TO PERFORM WHEN THE ACTION IS HALTED*/
     set_status(BT::HALTED);
