@@ -1,0 +1,12 @@
+digraph ParkingMode {
+  "P (SEQ)" -> "initialDriveNode (ACT)"
+  "P (SEQ)" -> "doCourseNode (SEQ)"
+  "doCourseNode (SEQ)" -> "parkingPendingNode (SEQ)"
+  "doCourseNode (SEQ)" -> "drivingNode (SEQ)"
+  "parkingPendingNode (SEQ)" -> "parkingSpotSearchNode (ACT)"
+  "parkingPendingNode (SEQ)" -> "parkingGetReadyNode (ACT)"
+  "parkingPendingNode (SEQ)" -> "parkingInProgressNode (ACT)"
+  "parkingPendingNode (SEQ)" -> "parkingReverseNode (ACT)"
+  "drivingNode (SEQ)" -> "standardDrivingNode (ACT)"
+  "drivingNode (SEQ)" -> "intersectionNode (ACT)"
+}

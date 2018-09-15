@@ -2,7 +2,10 @@
 #define NODE_INTERSECTION_CROSSING
 
 #include "action_node.h"
+#include "drive_ros_behavior_trees/BehaviorTreeMessage.h"
 
+extern drive_ros_behavior_trees::BehaviorTreeMessage latestMessage;
+extern bool messageProcessed;
 extern bool RCenabled;
 
 class IntersectionCrossing : public BT::ActionNode {

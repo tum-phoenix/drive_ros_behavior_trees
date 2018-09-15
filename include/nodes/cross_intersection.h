@@ -2,12 +2,13 @@
 #define NODE_CROSS_INTERSECTION
 
 #include "action_node.h"
+#include "drive_ros_behavior_trees/BehaviorTreeMessage.h"
 
+extern drive_ros_behavior_trees::BehaviorTreeMessage latestMessage;
+extern bool messageProcessed;
 extern bool RCenabled;
 
 class CrossIntersection : public BT::ActionNode {
-private:
-    bool started;
 public:
     CrossIntersection(std::string name);
    ~CrossIntersection();

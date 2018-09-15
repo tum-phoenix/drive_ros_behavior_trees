@@ -2,7 +2,10 @@
 #define NODE_DRIVE
 
 #include "action_node.h"
+#include "drive_ros_behavior_trees/BehaviorTreeMessage.h"
 
+extern drive_ros_behavior_trees::BehaviorTreeMessage latestMessage;
+extern bool messageProcessed;
 extern bool RCenabled;
 
 class Drive : public BT::ActionNode {

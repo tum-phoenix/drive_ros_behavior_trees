@@ -29,12 +29,19 @@ void InitialDrive::WaitForTick()
         // Running state
         set_status(BT::RUNNING);
         // Perform action...
-        while (get_status() != BT::HALTED)
+        while (get_status() != BT::HALTED && get_status() != BT::SUCCESS)
         {
-  /*HERE THE CODE TO EXECUTE FOR THE ACTION.
-   wHEN THE ACTION HAS FINISHED CORRECLTY, CALL set_status(BT::SUCCESS)
-  IF THE ACTION FAILS, CALL set_status(BT::FAILURE)*/
-  
+          if(!RCenabled) {
+            /* General actions */
+            if(!messageProcessed) {
+              /* Action when message is received */
+              set_status(BT::SUCCESS);
+              messageProcessed = true;
+            }
+          }
+          else {
+            //Handle RC mode
+          }
         }
     }
 }
@@ -42,6 +49,7 @@ void InitialDrive::WaitForTick()
 void InitialDrive::Halt()
 {
     /*HERE THE CODE TO PERFORM WHEN THE ACTION IS HALTED*/
+    ROS_INFO("HALT");
     set_status(BT::HALTED);
     DEBUG_STDOUT("HALTED state set!");
 }

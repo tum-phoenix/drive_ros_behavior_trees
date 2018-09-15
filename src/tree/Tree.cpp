@@ -2,6 +2,9 @@
 
 #include <behavior_tree.h>
 #include <iostream>
+#include <vector>
+
+#include "drive_ros_behavior_trees/BehaviorTreeMessage.h"
 
 #include <nodes/initial_drive.h>
 #include <nodes/parking_spot_search.h>
@@ -11,6 +14,7 @@
 #include <nodes/drive.h>
 #include <nodes/cross_intersection.h>
 
+#include <nodes/track_property.h>
 #include <nodes/switch_to_left_lane.h>
 #include <nodes/switch_to_right_lane.h>
 #include <nodes/pass_object.h>
@@ -22,7 +26,15 @@
 #include <nodes/intersection_wait.h>
 #include <nodes/intersection_crossing.h>
 
-extern bool RCenabled(false);
+drive_ros_behavior_trees::BehaviorTreeMessage latestMessage;
+bool messageProcessed;
+bool RCenabled;
+bool TPnodesActive[5];
+
+void subscriberCallback(const drive_ros_behavior_trees::BehaviorTreeMessage& msg) {
+  latestMessage = msg;
+  messageProcessed = false;
+}
 
 int main(int argc, char** argv) {
     ros::init(argc, argv, "BehaviorTree");
@@ -30,19 +42,26 @@ int main(int argc, char** argv) {
     std::string mode;
     n.getParam("behavior_tree/mode", mode);
 
+    ros::Subscriber sub = n.subscribe("behavior_tree_topic", 32, subscriberCallback);
+    messageProcessed = true;
+
+    RCenabled = false;
+
     try {
-        int tick_freq_ms = 1000;
+        int tick_freq_ms = 50;
 
         if(mode == "PARKING") {
           //Declare and initialize all BT nodes for PARKING mode
           BT::SequenceNodeWithMemory* headNode_P = new BT::SequenceNodeWithMemory("headOfTree");
           NODE_INITIAL_DRIVE::InitialDrive* initialDriveNode = new NODE_INITIAL_DRIVE::InitialDrive("Initial driving");
           BT::SequenceNodeWithMemory* doCourseNode = new BT::SequenceNodeWithMemory("Doing course...");
+
           BT::SequenceNodeWithMemory* parkingPendingNode = new BT::SequenceNodeWithMemory("Parking...");
           NODE_PARKING_SPOT_SEARCH::ParkingSpotSearch* parkingSpotSearchNode = new NODE_PARKING_SPOT_SEARCH::ParkingSpotSearch("Parking spot search");
           NODE_PARKING_GETREADY::ParkingGetready* parkingGetReadyNode = new NODE_PARKING_GETREADY::ParkingGetready("Parking-getready");
           NODE_PARKING_IN_PROGRESS::ParkingInProgress* parkingInProgressNode = new NODE_PARKING_IN_PROGRESS::ParkingInProgress("Parking in progress");
           NODE_PARKING_REVERSE::ParkingReverse* parkingReverseNode = new NODE_PARKING_REVERSE::ParkingReverse("Reversing parking");
+
           BT::SequenceNodeWithMemory* drivingNode = new BT::SequenceNodeWithMemory("Driving...");
           NODE_DRIVE::Drive* standardDrivingNode = new NODE_DRIVE::Drive("On normal track");
           NODE_CROSS_INTERSECTION::CrossIntersection* intersectionNode = new NODE_CROSS_INTERSECTION::CrossIntersection("Crossing intersection");
@@ -66,7 +85,7 @@ int main(int argc, char** argv) {
           //Declare and initialize all BT nodes for OBSTACLES mode
           BT::SequenceNodeWithMemory* headNode_O = new BT::SequenceNodeWithMemory("headOfTree");
           NODE_INITIAL_DRIVE::InitialDrive* initialDriveNode = new NODE_INITIAL_DRIVE::InitialDrive("Initial driving");
-          BT::FallbackNodeWithMemory* trackPropertyFallbackNode = new BT::FallbackNodeWithMemory("Driving");
+          NODE_TRACK_PROPERTY::TrackPropertyNode* trackPropertyNode = new NODE_TRACK_PROPERTY::TrackPropertyNode("Driving", 5);
 
           BT::SequenceNodeWithMemory* staticLaneBlockingNode = new BT::SequenceNodeWithMemory("Handling static lane-blocking obstacle");
           NODE_SWITCH_TO_LEFT_LANE::SwitchToLeftLane* staticLaneBlockingLeftswitchNode = new NODE_SWITCH_TO_LEFT_LANE::SwitchToLeftLane("Switching to left lane");
@@ -97,12 +116,12 @@ int main(int argc, char** argv) {
           NODE_INTERSECTION_CROSSING::IntersectionCrossing* intersectionDirectCrossingNode = new NODE_INTERSECTION_CROSSING::IntersectionCrossing("Crossing intersection without waiting");
 
           headNode_O->AddChild(initialDriveNode);
-          headNode_O->AddChild(trackPropertyFallbackNode);
-          trackPropertyFallbackNode->AddChild(staticLaneBlockingNode);
-          trackPropertyFallbackNode->AddChild(barredAreaNode);
-          trackPropertyFallbackNode->AddChild(dynamicObjectHandlingNode);
-          trackPropertyFallbackNode->AddChild(crosswalkNode);
-          trackPropertyFallbackNode->AddChild(intersectionHandlingNode);
+          headNode_O->AddChild(trackPropertyNode);
+          trackPropertyNode->AddChild(staticLaneBlockingNode);
+          trackPropertyNode->AddChild(barredAreaNode);
+          trackPropertyNode->AddChild(dynamicObjectHandlingNode);
+          trackPropertyNode->AddChild(crosswalkNode);
+          trackPropertyNode->AddChild(intersectionHandlingNode);
           staticLaneBlockingNode->AddChild(staticLaneBlockingLeftswitchNode);
           staticLaneBlockingNode->AddChild(staticLaneBlockingPassingNode);
           staticLaneBlockingNode->AddChild(staticLaneBlockingRightswitchNode);

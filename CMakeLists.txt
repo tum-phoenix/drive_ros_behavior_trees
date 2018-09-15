@@ -53,11 +53,10 @@ find_package(catkin REQUIRED COMPONENTS
 ##   * add every package in MSG_DEP_SET to generate_messages(DEPENDENCIES ...)
 
 ## Generate messages in the 'msg' folder
-# add_message_files(
-#   FILES
-#   Message1.msg
-#   Message2.msg
-# )
+add_message_files(
+  FILES
+  BehaviorTreeMessage.msg
+)
 
 ## Generate services in the 'srv' folder
 # add_service_files(
@@ -74,10 +73,10 @@ find_package(catkin REQUIRED COMPONENTS
 # )
 
 ## Generate added messages and services with any dependencies listed here
-# generate_messages(
-#   DEPENDENCIES
-#   std_msgs  # Or other packages containing msgs
-# )
+generate_messages(
+ DEPENDENCIES
+ std_msgs  # Or other packages containing msgs
+)
 
 ################################################
 ## Declare ROS dynamic reconfigure parameters ##
@@ -111,7 +110,7 @@ find_package(catkin REQUIRED COMPONENTS
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES behavior_trees
-#  CATKIN_DEPENDS actionlib_msgs
+  CATKIN_DEPENDS message_runtime
 #  DEPENDS system_lib
 )
 
@@ -214,6 +213,7 @@ add_executable(BehaviorTree src/tree/Tree.cpp
   src/nodes/drive.cpp
   src/nodes/cross_intersection.cpp
 
+  src/nodes/track_property.cpp
   src/nodes/switch_to_left_lane.cpp
   src/nodes/switch_to_right_lane.cpp
   src/nodes/pass_object.cpp
@@ -224,4 +224,5 @@ add_executable(BehaviorTree src/tree/Tree.cpp
   src/nodes/intersection_break.cpp
   src/nodes/intersection_wait.cpp
   src/nodes/intersection_crossing.cpp)
+add_dependencies(BehaviorTree ${BehaviorTree_generate_messages_cpp} ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 target_link_libraries(BehaviorTree ${catkin_LIBRARIES})
