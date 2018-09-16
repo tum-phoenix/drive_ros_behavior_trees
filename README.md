@@ -17,6 +17,7 @@ And they cannot
 - Display RC mode, although RC mode is being handled by the node. It's only unnecessarily complex to implement that into the BT models.
 - Handle *all* kinds of failure states (e.g. out of track, parking not successful, ...).
 - Provide the currently important street signs, especially not the priority road sign (I think they should at some point be able to do that).
+- Provide their current status via a ROS service (yet). This is still to be done.
 
 ## Messages needed in topic "behavior_tree_topic" to control the BT
 This table is meant to try and standardize the message contents some nodes send to update the BT. I decided to go with plain trext since it's just as powerful as using ID numbers or something else, but they can be immediately read in the console output if needed. I tried coming up with easily understandable and unambiguous short messages. For now, it doesn't seem necessary to me to include anything additionally to the notification command in the message, this may change during development.
