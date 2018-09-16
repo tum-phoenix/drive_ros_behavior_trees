@@ -5,7 +5,10 @@ Still work in progress!!
 
 ## WTF are Behavior Trees?!
 Behavior Trees can be used for anything from modeling and supervising the current status of the car to a complete control unit taking in processed sensor data and outputting motor commands.
-Basically they are trees organizing the possible states of some machine. They use Control Nodes (Sequence nodes, Fallback nodes, Parallel nodes -> usually provided by the lib you use) which specify the way their children are executed, and Action Nodes (-> usually custom coded) which specify how an atomar task is performed. All nodes have a a state for themselves (idle, running, success, ...). Of course, a control node can have both control and action nodes as children, while action nodes never have children. For further reading I recommend Chapter 1 of the Manual provided by the library I used (see "Dependencies").
+
+Basically they are trees organizing the possible states of some machine. They use Control Nodes (Sequence nodes, Fallback nodes, Parallel nodes -> usually provided by the lib you use) which specify the way their children are executed, and Action Nodes (-> usually custom coded) which specify how an atomar task is performed. 
+
+All nodes have a a state for themselves (idle, running, success, ...). Of course, a control node can have both control and action nodes as children, while action nodes never have children. For further reading I recommend Chapter 1 of the Manual provided by the library I used (see "Dependencies").
 
 ## Current functions and abilities of the trees
 For now, the BT models are capable of
