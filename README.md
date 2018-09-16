@@ -22,7 +22,9 @@ And they cannot
 This table is meant to try and standardize the message contents some nodes send to update the BT. I decided to go with plain trext since it's just as powerful as using ID numbers or something else, but they can be immediately read in the console output if needed. I tried coming up with easily understandable and unambiguous short messages. For now, it doesn't seem necessary to me to include anything additionally to the notification command in the message, this may change during development.
 
 **TODO:** If you know the responsible package for some event, please exchange the (?) with its name.
+
 **TODO:** What component decides when and on what basis whether overtaking a dyn. object is permitted? -> Add event to the table
+
 **TODO:** Handling the detection of a car at an intersection that has the right of way
 
 Driving Mode (Parking/Obstacles) | Event | Message Content | Proposed source package
