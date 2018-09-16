@@ -31,7 +31,7 @@ This table is meant to try and standardize the message contents some nodes send 
 
 **TODO:** Handling the detection of a car at an intersection that has the right of way
 
-Driving Mode (Parking/Obstacles) | Event | Message Content | Proposed source package
+Driving Mode (Parking/Obstacles) | Event  / To be transmitted | Message Content | Proposed source package
 --- | --- | --- | ---
 Both | Start line crossed | "Crossed start line" | drive_ros_image_recognition
 Parking | Fitting parking spot found | "Parking spot found" | (?)
