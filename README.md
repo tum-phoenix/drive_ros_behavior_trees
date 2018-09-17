@@ -40,6 +40,7 @@ Parking | Ready to start parking (velocity=0, correctly positioned) | "Ready for
 Parking | Parking stopped successfully (->car is in parking spot) | "Parking successful" | (?)
 Parking | Car is on track again (reverse parking successful) | "Parking process completed" | (?)
 Parking | Intersection immediately upfront | "Intersection detected" | (drive_ros_image_recognition?)
+Parking | Intersection is over, lane markings left and right directly in front of the car | "Intersection ended" | (?)
 Obstacles | Static lane blocking object immediately upfront | "Static lane blocking object detected" | (?)
 Obstacles | Barred area immediately upfront | "Barred area detected" | (?)
 Obstacles | Dynamic object detected | "Dynamic object detected" | (?)
