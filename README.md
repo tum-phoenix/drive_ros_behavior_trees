@@ -33,6 +33,7 @@ This table is meant to try and standardize the message contents some nodes send 
 
 Driving Mode (Parking/Obstacles) | Event  / To be transmitted | Message Content | Proposed source package
 --- | --- | --- | ---
+Both | Car stopped (velocity=0) | "Car stopped" | (?)
 Both | Start line crossed | "Crossed start line" | drive_ros_image_recognition
 Parking | Fitting parking spot found | "Parking spot found" | (?)
 Parking | Ready to start parking (velocity=0, correctly positioned) | "Ready for parking" | (?)
