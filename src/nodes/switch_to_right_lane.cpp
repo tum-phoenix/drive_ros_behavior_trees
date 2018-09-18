@@ -35,7 +35,10 @@ void SwitchToRightLane::WaitForTick()
             /* General actions */
             if(!messageProcessed) {
               /* Action when message is received */
-              messageProcessed = true;
+              if(!latestMessage.command.compare("Switched to right lane")) {
+                set_status(BT::SUCCESS);
+                messageProcessed = true;
+              }
             }
           }
           else {

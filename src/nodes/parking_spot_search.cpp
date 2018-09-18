@@ -35,8 +35,10 @@ void ParkingSpotSearch::WaitForTick()
           if(!RCenabled) {
             /* General actions */
             if(!messageProcessed) {
-              /* Action when message is received */
-              messageProcessed = true;
+              if(!latestMessage.command.compare("Parking spot found")) {
+                set_status(BT::SUCCESS);
+                messageProcessed = true;
+              }
             }
           }
           else {

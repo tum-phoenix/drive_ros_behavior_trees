@@ -35,7 +35,10 @@ void CrosswalkBreak::WaitForTick()
             /* General actions */
             if(!messageProcessed) {
               /* Action when message is received */
-              messageProcessed = true;
+              if(!latestMessage.command.compare("Car stopped")) {
+                set_status(BT::SUCCESS);
+                messageProcessed = true;
+              }
             }
           }
           else {

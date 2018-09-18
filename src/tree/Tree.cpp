@@ -68,8 +68,10 @@ int main(int argc, char** argv) {
 
           headNode_P->AddChild(initialDriveNode);
           headNode_P->AddChild(doCourseNode);
+
           doCourseNode->AddChild(parkingPendingNode);
           doCourseNode->AddChild(drivingNode);
+          
           parkingPendingNode->AddChild(parkingSpotSearchNode);
           parkingPendingNode->AddChild(parkingGetReadyNode);
           parkingPendingNode->AddChild(parkingInProgressNode);
@@ -117,11 +119,13 @@ int main(int argc, char** argv) {
 
           headNode_O->AddChild(initialDriveNode);
           headNode_O->AddChild(trackPropertyNode);
+
           trackPropertyNode->AddChild(staticLaneBlockingNode);
           trackPropertyNode->AddChild(barredAreaNode);
           trackPropertyNode->AddChild(dynamicObjectHandlingNode);
           trackPropertyNode->AddChild(crosswalkNode);
           trackPropertyNode->AddChild(intersectionHandlingNode);
+
           staticLaneBlockingNode->AddChild(staticLaneBlockingLeftswitchNode);
           staticLaneBlockingNode->AddChild(staticLaneBlockingPassingNode);
           staticLaneBlockingNode->AddChild(staticLaneBlockingRightswitchNode);

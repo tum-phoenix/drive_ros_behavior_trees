@@ -36,7 +36,10 @@ void ParkingGetready::WaitForTick()
             /* General actions */
             if(!messageProcessed) {
               /* Action when message is received */
-              messageProcessed = true;
+              if(!latestMessage.command.compare("Ready for parking")) {
+                set_status(BT::SUCCESS);
+                messageProcessed = true;
+              }
             }
           }
           else {

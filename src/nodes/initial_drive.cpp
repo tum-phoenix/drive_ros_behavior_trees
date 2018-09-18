@@ -35,8 +35,10 @@ void InitialDrive::WaitForTick()
             /* General actions */
             if(!messageProcessed) {
               /* Action when message is received */
-              set_status(BT::SUCCESS);
-              messageProcessed = true;
+              if(!latestMessage.command.compare("Crossed start line")) {
+                set_status(BT::SUCCESS);
+                messageProcessed = true;
+              }
             }
           }
           else {
@@ -49,7 +51,6 @@ void InitialDrive::WaitForTick()
 void InitialDrive::Halt()
 {
     /*HERE THE CODE TO PERFORM WHEN THE ACTION IS HALTED*/
-    ROS_INFO("HALT");
     set_status(BT::HALTED);
     DEBUG_STDOUT("HALTED state set!");
 }

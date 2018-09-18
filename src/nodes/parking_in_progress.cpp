@@ -37,7 +37,10 @@ void ParkingInProgress::WaitForTick()
             /* General actions */
             if(!messageProcessed) {
               /* Action when message is received */
-              messageProcessed = true;
+              if(!latestMessage.command.compare("Parking successful")) {
+                set_status(BT::SUCCESS);
+                messageProcessed = true;
+              }
             }
           }
           else {

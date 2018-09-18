@@ -21,9 +21,26 @@ BT::ReturnStatus TrackPropertyNode::Tick()
     N_of_children_ = children_nodes_.size();
 
     if(!messageProcessed) {
-      ROS_INFO("node %d", latestMessage.command.c_str()[0] - '1');
-      TPnodesActive[latestMessage.command.c_str()[0] - '1'] = !TPnodesActive[latestMessage.command.c_str()[0] - '1'];
-      messageProcessed = true;
+      if(!latestMessage.command.compare("Static lane blocking object detected")) {
+        TPnodesActive[0] = true;
+        messageProcessed = true;
+      }
+      else if(!latestMessage.command.compare("Barred area detected")) {
+        TPnodesActive[1] = true;
+        messageProcessed = true;
+      }
+      else if(!latestMessage.command.compare("Dynamic object detected")) {
+        TPnodesActive[2] = true;
+        messageProcessed = true;
+      }
+      else if(!latestMessage.command.compare("Crosswalk detected")) {
+        TPnodesActive[3] = true;
+        messageProcessed = true;
+      }
+      else if(!latestMessage.command.compare("Intersection detected")) {
+        TPnodesActive[4] = true;
+        messageProcessed = true;
+      }
     }
 
     // Routing the tree according to the sequence node's logic:
