@@ -33,12 +33,14 @@ This table is meant to try and standardize the message contents some nodes send 
 
 Driving Mode (Parking/Obstacles) | Event  / To be transmitted | Message Content | Proposed source package
 --- | --- | --- | ---
+Both | Car stopped (velocity=0) | "Car stopped" | (?)
 Both | Start line crossed | "Crossed start line" | drive_ros_image_recognition
 Parking | Fitting parking spot found | "Parking spot found" | (?)
 Parking | Ready to start parking (velocity=0, correctly positioned) | "Ready for parking" | (?)
-Parking | Parking stopped successfully | "Parking successful" | (?)
+Parking | Parking stopped successfully (->car is in parking spot) | "Parking successful" | (?)
 Parking | Car is on track again (reverse parking successful) | "Parking process completed" | (?)
 Parking | Intersection immediately upfront | "Intersection detected" | (drive_ros_image_recognition?)
+Parking | Intersection is over, lane markings left and right directly in front of the car | "Intersection ended" | (?)
 Obstacles | Static lane blocking object immediately upfront | "Static lane blocking object detected" | (?)
 Obstacles | Barred area immediately upfront | "Barred area detected" | (?)
 Obstacles | Dynamic object detected | "Dynamic object detected" | (?)
