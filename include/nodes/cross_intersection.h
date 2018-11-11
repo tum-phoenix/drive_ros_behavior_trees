@@ -8,13 +8,16 @@ extern drive_ros_behavior_trees::BehaviorTreeMessage latestMessage;
 extern bool messageProcessed;
 extern bool RCenabled;
 
-class CrossIntersection : public BT::ActionNode {
-public:
-    CrossIntersection(std::string name);
-   ~CrossIntersection();
-    void start();
-    void WaitForTick();
-    void Halt() override;
-};
+namespace NODES {
+  class CrossIntersection : public BT::ActionNode {
+  public:
+      CrossIntersection(std::string name);
+     ~CrossIntersection();
+      void start();
+      void WaitForTick();
+      void Halt() override;
+  };
+}
+
 
 #endif

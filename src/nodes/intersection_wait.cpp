@@ -10,13 +10,13 @@
 #include <nodes/intersection_wait.h>
 #include <string>
 
-NODE_INTERSECTION_WAIT::IntersectionWait::IntersectionWait(std::string name):
+NODES::IntersectionWait::IntersectionWait(std::string name):
   BT::ActionNode(name)
 {
-  thread_ = std::thread(&IntersectionWait::WaitForTick, this);
+  thread_ = std::thread(&NODES::IntersectionWait::WaitForTick, this);
 }
 
-void IntersectionWait::WaitForTick()
+void NODES::IntersectionWait::WaitForTick()
 {
     while (true)
     {
@@ -45,7 +45,7 @@ void IntersectionWait::WaitForTick()
     }
 }
 
-void IntersectionWait::Halt()
+void NODES::IntersectionWait::Halt()
 {
     /*HERE THE CODE TO PERFORM WHEN THE ACTION IS HALTED*/
     set_status(BT::HALTED);

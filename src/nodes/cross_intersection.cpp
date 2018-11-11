@@ -10,13 +10,13 @@
 #include <nodes/cross_intersection.h>
 #include <string>
 
-NODE_CROSS_INTERSECTION::CrossIntersection::CrossIntersection(std::string name):
+NODES::CrossIntersection::CrossIntersection(std::string name):
   BT::ActionNode(name)
 {
-  thread_ = std::thread(&CrossIntersection::WaitForTick, this);
+  thread_ = std::thread(&NODES::CrossIntersection::WaitForTick, this);
 }
 
-void CrossIntersection::WaitForTick()
+void NODES::CrossIntersection::WaitForTick()
 {
     while (true)
     {
@@ -49,7 +49,7 @@ void CrossIntersection::WaitForTick()
     }
 }
 
-void CrossIntersection::Halt()
+void NODES::CrossIntersection::Halt()
 {
     /*HERE THE CODE TO PERFORM WHEN THE ACTION IS HALTED*/
     set_status(BT::HALTED);

@@ -9,13 +9,13 @@
 #include <nodes/parking_reverse.h>
 #include <string>
 
-NODE_PARKING_REVERSE::ParkingReverse::ParkingReverse(std::string name) : ActionNode::ActionNode(name)
+NODES::ParkingReverse::ParkingReverse(std::string name) : ActionNode::ActionNode(name)
 {
-    thread_ = std::thread(&ParkingReverse::WaitForTick, this);
+    thread_ = std::thread(&NODES::ParkingReverse::WaitForTick, this);
 }
 
 
-void ParkingReverse::WaitForTick()
+void NODES::ParkingReverse::WaitForTick()
 {
     while (true)
     {
@@ -45,7 +45,7 @@ void ParkingReverse::WaitForTick()
     }
 }
 
-void ParkingReverse::Halt()
+void NODES::ParkingReverse::Halt()
 {
     /*HERE THE CODE TO PERFORM WHEN THE ACTION IS HALTED*/
     set_status(BT::HALTED);

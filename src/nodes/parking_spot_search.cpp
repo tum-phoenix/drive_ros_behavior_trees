@@ -9,14 +9,14 @@
 #include <nodes/parking_spot_search.h>
 #include <string>
 
-NODE_PARKING_SPOT_SEARCH::ParkingSpotSearch::ParkingSpotSearch(std::string name) : ActionNode::ActionNode(name)
+NODES::ParkingSpotSearch::ParkingSpotSearch(std::string name) : ActionNode::ActionNode(name)
 {
-    thread_ = std::thread(&ParkingSpotSearch::WaitForTick, this);
+    thread_ = std::thread(&NODES::ParkingSpotSearch::WaitForTick, this);
 }
 
 
 
-void ParkingSpotSearch::WaitForTick()
+void NODES::ParkingSpotSearch::WaitForTick()
 {
     while (true)
     {
@@ -48,7 +48,7 @@ void ParkingSpotSearch::WaitForTick()
     }
 }
 
-void ParkingSpotSearch::Halt()
+void NODES::ParkingSpotSearch::Halt()
 {
     /*HERE THE CODE TO PERFORM WHEN THE ACTION IS HALTED*/
     set_status(BT::HALTED);

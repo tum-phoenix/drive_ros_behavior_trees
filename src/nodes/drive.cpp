@@ -10,19 +10,19 @@
 #include <nodes/drive.h>
 #include <string>
 
-NODE_DRIVE::Drive::Drive(std::string name):
+NODES::Drive::Drive(std::string name):
   BT::ActionNode(name)
 {
-  thread_ = std::thread(&Drive::WaitForTick, this);
+  thread_ = std::thread(&NODES::Drive::WaitForTick, this);
 }
 
 
-void Drive::start() {
+void NODES::Drive::start() {
     started = true;
     //Notify other controls: (adjust wheels to straight forward), start driving, wait for chequered line
 }
 
-void Drive::WaitForTick()
+void NODES::Drive::WaitForTick()
 {
     while (true)
     {
@@ -55,7 +55,7 @@ void Drive::WaitForTick()
     }
 }
 
-void Drive::Halt()
+void NODES::Drive::Halt()
 {
     /*HERE THE CODE TO PERFORM WHEN THE ACTION IS HALTED*/
     set_status(BT::HALTED);

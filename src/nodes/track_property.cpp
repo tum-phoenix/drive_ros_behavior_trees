@@ -6,14 +6,14 @@ It is modified in a way that it won't ever stop, but wait for a new track proper
 #include <vector>
 #include <ros/ros.h>
 
-NODE_TRACK_PROPERTY::TrackPropertyNode::TrackPropertyNode(std::string name, int threshold_M) : BT::ControlNode::ControlNode(name)
+NODES::TrackPropertyNode::TrackPropertyNode(std::string name, int threshold_M) : BT::ControlNode::ControlNode(name)
 {
     threshold_M_ = threshold_M;
 }
 
-NODE_TRACK_PROPERTY::TrackPropertyNode::~TrackPropertyNode() {}
+NODES::TrackPropertyNode::~TrackPropertyNode() {}
 
-BT::ReturnStatus TrackPropertyNode::Tick()
+BT::ReturnStatus NODES::TrackPropertyNode::Tick()
 {
     success_childred_num_ = 0;
     failure_childred_num_ = 0;
@@ -115,25 +115,25 @@ BT::ReturnStatus TrackPropertyNode::Tick()
     return BT::RUNNING;
 }
 
-void TrackPropertyNode::Halt()
+void NODES::TrackPropertyNode::Halt()
 {
     success_childred_num_ = 0;
     failure_childred_num_ = 0;
     BT::ControlNode::Halt();
 }
 
-int TrackPropertyNode::DrawType()
+int NODES::TrackPropertyNode::DrawType()
 {
     return BT::PARALLEL;
 }
 
 
-unsigned int TrackPropertyNode::get_threshold_M()
+unsigned int NODES::TrackPropertyNode::get_threshold_M()
 {
     return threshold_M_;
 }
 
-void TrackPropertyNode::set_threshold_M(unsigned int threshold_M)
+void NODES::TrackPropertyNode::set_threshold_M(unsigned int threshold_M)
 {
     threshold_M_ = threshold_M;
 }

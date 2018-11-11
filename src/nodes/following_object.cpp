@@ -10,13 +10,13 @@
 #include <nodes/following_object.h>
 #include <string>
 
-NODE_FOLLOWING_OBJECT::FollowingObject::FollowingObject(std::string name):
+NODES::FollowingObject::FollowingObject(std::string name):
   BT::ActionNode(name)
 {
-  thread_ = std::thread(&FollowingObject::WaitForTick, this);
+  thread_ = std::thread(&NODES::FollowingObject::WaitForTick, this);
 }
 
-void FollowingObject::WaitForTick()
+void NODES::FollowingObject::WaitForTick()
 {
     while (true)
     {
@@ -45,7 +45,7 @@ void FollowingObject::WaitForTick()
     }
 }
 
-void FollowingObject::Halt()
+void NODES::FollowingObject::Halt()
 {
     /*HERE THE CODE TO PERFORM WHEN THE ACTION IS HALTED*/
     set_status(BT::HALTED);

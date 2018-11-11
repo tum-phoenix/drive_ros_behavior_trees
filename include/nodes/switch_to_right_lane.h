@@ -8,11 +8,14 @@ extern drive_ros_behavior_trees::BehaviorTreeMessage latestMessage;
 extern bool messageProcessed;
 extern bool RCenabled;
 
-class SwitchToRightLane : public BT::ActionNode {
-public:
-    SwitchToRightLane(std::string name);
-    void WaitForTick();
-    void Halt() override;
-};
+namespace NODES {
+  class SwitchToRightLane : public BT::ActionNode {
+  public:
+      SwitchToRightLane(std::string name);
+      void WaitForTick();
+      void Halt() override;
+  };
+}
+
 
 #endif

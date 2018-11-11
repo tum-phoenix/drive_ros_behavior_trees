@@ -10,13 +10,13 @@
 #include <nodes/intersection_break.h>
 #include <string>
 
-NODE_INTERSECTION_BREAK::IntersectionBreak::IntersectionBreak(std::string name):
+NODES::IntersectionBreak::IntersectionBreak(std::string name):
   BT::ActionNode(name)
 {
-  thread_ = std::thread(&IntersectionBreak::WaitForTick, this);
+  thread_ = std::thread(&NODES::IntersectionBreak::WaitForTick, this);
 }
 
-void IntersectionBreak::WaitForTick()
+void NODES::IntersectionBreak::WaitForTick()
 {
     while (true)
     {
@@ -45,7 +45,7 @@ void IntersectionBreak::WaitForTick()
     }
 }
 
-void IntersectionBreak::Halt()
+void NODES::IntersectionBreak::Halt()
 {
     /*HERE THE CODE TO PERFORM WHEN THE ACTION IS HALTED*/
     set_status(BT::HALTED);

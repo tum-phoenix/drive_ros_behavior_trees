@@ -9,14 +9,14 @@
 #include <nodes/parking_getready.h>
 #include <string>
 
-NODE_PARKING_GETREADY::ParkingGetready::ParkingGetready(std::string name) : BT::ActionNode(name)
+NODES::ParkingGetready::ParkingGetready(std::string name) : BT::ActionNode(name)
 {
-    thread_ = std::thread(&ParkingGetready::WaitForTick, this);
+    thread_ = std::thread(&NODES::ParkingGetready::WaitForTick, this);
 }
 
 
 
-void ParkingGetready::WaitForTick()
+void NODES::ParkingGetready::WaitForTick()
 {
     while (true)
     {
@@ -49,7 +49,7 @@ void ParkingGetready::WaitForTick()
     }
 }
 
-void ParkingGetready::Halt()
+void NODES::ParkingGetready::Halt()
 {
     /*HERE THE CODE TO PERFORM WHEN THE ACTION IS HALTED*/
     set_status(BT::HALTED);

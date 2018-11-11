@@ -9,23 +9,26 @@ extern drive_ros_behavior_trees::BehaviorTreeMessage latestMessage;
 extern bool messageProcessed;
 extern bool TPnodesActive[];
 
-class TrackPropertyNode : public BT::ControlNode
-{
-public:
-    // Constructor
-    explicit TrackPropertyNode(std::string name, int threshold_M);
-    ~TrackPropertyNode();
-    int DrawType();
-    BT::ReturnStatus Tick();
-    void Halt();
+namespace NODES {
+  class TrackPropertyNode : public BT::ControlNode
+  {
+  public:
+      // Constructor
+      explicit TrackPropertyNode(std::string name, int threshold_M);
+      ~TrackPropertyNode();
+      int DrawType();
+      BT::ReturnStatus Tick();
+      void Halt();
 
-    unsigned int get_threshold_M();
-    void set_threshold_M(unsigned int threshold_M);
+      unsigned int get_threshold_M();
+      void set_threshold_M(unsigned int threshold_M);
 
-private:
-    unsigned int threshold_M_;
-    unsigned int success_childred_num_;
-    unsigned int failure_childred_num_;
-};
+  private:
+      unsigned int threshold_M_;
+      unsigned int success_childred_num_;
+      unsigned int failure_childred_num_;
+  };
 
-#endif  // PARALLEL_NODE_H
+}
+
+  #endif  // PARALLEL_NODE_H

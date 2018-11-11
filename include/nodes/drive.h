@@ -8,14 +8,17 @@ extern drive_ros_behavior_trees::BehaviorTreeMessage latestMessage;
 extern bool messageProcessed;
 extern bool RCenabled;
 
-class Drive : public BT::ActionNode {
-private:
-    bool started;
-public:
-    Drive(std::string name);
-    void start();
-    void WaitForTick();
-    void Halt() override;
-};
+namespace NODES {
+  class Drive : public BT::ActionNode {
+  private:
+      bool started;
+  public:
+      Drive(std::string name);
+      void start();
+      void WaitForTick();
+      void Halt() override;
+  };
+}
+
 
 #endif

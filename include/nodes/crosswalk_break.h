@@ -8,11 +8,14 @@ extern drive_ros_behavior_trees::BehaviorTreeMessage latestMessage;
 extern bool messageProcessed;
 extern bool RCenabled;
 
-class CrosswalkBreak : public BT::ActionNode {
-public:
-    CrosswalkBreak(std::string name);
-    void WaitForTick();
-    void Halt() override;
-};
+namespace NODES {
+  class CrosswalkBreak : public BT::ActionNode {
+  public:
+      CrosswalkBreak(std::string name);
+      void WaitForTick();
+      void Halt() override;
+  };
+}
+
 
 #endif

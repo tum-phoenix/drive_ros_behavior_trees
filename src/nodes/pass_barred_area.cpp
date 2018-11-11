@@ -10,13 +10,13 @@
 #include <nodes/pass_barred_area.h>
 #include <string>
 
-NODE_PASS_BARRED_AREA::PassBarredArea::PassBarredArea(std::string name):
+NODES::PassBarredArea::PassBarredArea(std::string name):
   BT::ActionNode(name)
 {
-  thread_ = std::thread(&PassBarredArea::WaitForTick, this);
+  thread_ = std::thread(&NODES::PassBarredArea::WaitForTick, this);
 }
 
-void PassBarredArea::WaitForTick()
+void NODES::PassBarredArea::WaitForTick()
 {
     while (true)
     {
@@ -45,7 +45,7 @@ void PassBarredArea::WaitForTick()
     }
 }
 
-void PassBarredArea::Halt()
+void NODES::PassBarredArea::Halt()
 {
     /*HERE THE CODE TO PERFORM WHEN THE ACTION IS HALTED*/
     set_status(BT::HALTED);

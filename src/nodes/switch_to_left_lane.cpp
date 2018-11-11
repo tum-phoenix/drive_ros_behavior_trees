@@ -10,13 +10,13 @@
 #include <nodes/switch_to_left_lane.h>
 #include <string>
 
-NODE_SWITCH_TO_LEFT_LANE::SwitchToLeftLane::SwitchToLeftLane(std::string name):
+NODES::SwitchToLeftLane::SwitchToLeftLane(std::string name):
   BT::ActionNode(name)
 {
-  thread_ = std::thread(&SwitchToLeftLane::WaitForTick, this);
+  thread_ = std::thread(&NODES::SwitchToLeftLane::WaitForTick, this);
 }
 
-void SwitchToLeftLane::WaitForTick()
+void NODES::SwitchToLeftLane::WaitForTick()
 {
     while (true)
     {
@@ -47,7 +47,7 @@ void SwitchToLeftLane::WaitForTick()
     }
 }
 
-void SwitchToLeftLane::Halt()
+void NODES::SwitchToLeftLane::Halt()
 {
     /*HERE THE CODE TO PERFORM WHEN THE ACTION IS HALTED*/
     set_status(BT::HALTED);

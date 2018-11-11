@@ -10,13 +10,13 @@
 #include <nodes/pass_object.h>
 #include <string>
 
-NODE_PASS_OBJECT::PassObject::PassObject(std::string name):
+NODES::PassObject::PassObject(std::string name):
   BT::ActionNode(name)
 {
-  thread_ = std::thread(&PassObject::WaitForTick, this);
+  thread_ = std::thread(&NODES::PassObject::WaitForTick, this);
 }
 
-void PassObject::WaitForTick()
+void NODES::PassObject::WaitForTick()
 {
     while (true)
     {
@@ -45,7 +45,7 @@ void PassObject::WaitForTick()
     }
 }
 
-void PassObject::Halt()
+void NODES::PassObject::Halt()
 {
     /*HERE THE CODE TO PERFORM WHEN THE ACTION IS HALTED*/
     set_status(BT::HALTED);

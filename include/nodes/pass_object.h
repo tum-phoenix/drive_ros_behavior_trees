@@ -8,11 +8,14 @@ extern drive_ros_behavior_trees::BehaviorTreeMessage latestMessage;
 extern bool messageProcessed;
 extern bool RCenabled;
 
-class PassObject : public BT::ActionNode {
-public:
-    PassObject(std::string name);
-    void WaitForTick();
-    void Halt() override;
-};
+namespace NODES {
+  class PassObject : public BT::ActionNode {
+  public:
+      PassObject(std::string name);
+      void WaitForTick();
+      void Halt() override;
+  };
+}
+
 
 #endif

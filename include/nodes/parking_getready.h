@@ -8,11 +8,14 @@ extern drive_ros_behavior_trees::BehaviorTreeMessage latestMessage;
 extern bool messageProcessed;
 extern bool RCenabled;
 
-class ParkingGetready : public BT::ActionNode {
-public:
-    ParkingGetready(std::string name);
-    void WaitForTick();
-    void Halt() override;
-};
+namespace NODES {
+  class ParkingGetready : public BT::ActionNode {
+  public:
+      ParkingGetready(std::string name);
+      void WaitForTick();
+      void Halt() override;
+  };
+}
+
 
 #endif

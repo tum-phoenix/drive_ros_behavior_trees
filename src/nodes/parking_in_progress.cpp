@@ -10,14 +10,14 @@
 #include <nodes/parking_in_progress.h>
 #include <string>
 
-NODE_PARKING_IN_PROGRESS::ParkingInProgress::ParkingInProgress(std::string name) : ActionNode::ActionNode(name)
+NODES::ParkingInProgress::ParkingInProgress(std::string name) : ActionNode::ActionNode(name)
 {
-    thread_ = std::thread(&ParkingInProgress::WaitForTick, this);
+    thread_ = std::thread(&NODES::ParkingInProgress::WaitForTick, this);
 }
 
 
 
-void ParkingInProgress::WaitForTick()
+void NODES::ParkingInProgress::WaitForTick()
 {
     while (true)
     {
@@ -53,7 +53,7 @@ void ParkingInProgress::WaitForTick()
     }
 }
 
-void ParkingInProgress::Halt()
+void NODES::ParkingInProgress::Halt()
 {
     /*HERE THE CODE TO PERFORM WHEN THE ACTION IS HALTED*/
     set_status(BT::HALTED);

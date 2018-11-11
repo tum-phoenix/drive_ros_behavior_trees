@@ -10,13 +10,13 @@
 #include <nodes/initial_drive.h>
 #include <string>
 
-NODE_INITIAL_DRIVE::InitialDrive::InitialDrive(std::string name):
+NODES::InitialDrive::InitialDrive(std::string name):
   BT::ActionNode(name)
 {
-  thread_ = std::thread(&InitialDrive::WaitForTick, this);
+  thread_ = std::thread(&NODES::InitialDrive::WaitForTick, this);
 }
 
-void InitialDrive::WaitForTick()
+void NODES::InitialDrive::WaitForTick()
 {
     while (true)
     {
@@ -48,7 +48,7 @@ void InitialDrive::WaitForTick()
     }
 }
 
-void InitialDrive::Halt()
+void NODES::InitialDrive::Halt()
 {
     /*HERE THE CODE TO PERFORM WHEN THE ACTION IS HALTED*/
     set_status(BT::HALTED);

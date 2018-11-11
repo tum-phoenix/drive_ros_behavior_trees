@@ -53,25 +53,25 @@ int main(int argc, char** argv) {
         if(mode == "PARKING") {
           //Declare and initialize all BT nodes for PARKING mode
           BT::SequenceNodeWithMemory* headNode_P = new BT::SequenceNodeWithMemory("headOfTree");
-          NODE_INITIAL_DRIVE::InitialDrive* initialDriveNode = new NODE_INITIAL_DRIVE::InitialDrive("Initial driving");
+          NODES::InitialDrive* initialDriveNode = new NODES::InitialDrive("Initial driving");
           BT::SequenceNodeWithMemory* doCourseNode = new BT::SequenceNodeWithMemory("Doing course...");
 
           BT::SequenceNodeWithMemory* parkingPendingNode = new BT::SequenceNodeWithMemory("Parking...");
-          NODE_PARKING_SPOT_SEARCH::ParkingSpotSearch* parkingSpotSearchNode = new NODE_PARKING_SPOT_SEARCH::ParkingSpotSearch("Parking spot search");
-          NODE_PARKING_GETREADY::ParkingGetready* parkingGetReadyNode = new NODE_PARKING_GETREADY::ParkingGetready("Parking-getready");
-          NODE_PARKING_IN_PROGRESS::ParkingInProgress* parkingInProgressNode = new NODE_PARKING_IN_PROGRESS::ParkingInProgress("Parking in progress");
-          NODE_PARKING_REVERSE::ParkingReverse* parkingReverseNode = new NODE_PARKING_REVERSE::ParkingReverse("Reversing parking");
+          NODES::ParkingSpotSearch* parkingSpotSearchNode = new NODES::ParkingSpotSearch("Parking spot search");
+          NODES::ParkingGetready* parkingGetReadyNode = new NODES::ParkingGetready("Parking-getready");
+          NODES::ParkingInProgress* parkingInProgressNode = new NODES::ParkingInProgress("Parking in progress");
+          NODES::ParkingReverse* parkingReverseNode = new NODES::ParkingReverse("Reversing parking");
 
           BT::SequenceNodeWithMemory* drivingNode = new BT::SequenceNodeWithMemory("Driving...");
-          NODE_DRIVE::Drive* standardDrivingNode = new NODE_DRIVE::Drive("On normal track");
-          NODE_CROSS_INTERSECTION::CrossIntersection* intersectionNode = new NODE_CROSS_INTERSECTION::CrossIntersection("Crossing intersection");
+          NODES::Drive* standardDrivingNode = new NODES::Drive("On normal track");
+          NODES::CrossIntersection* intersectionNode = new NODES::CrossIntersection("Crossing intersection");
 
           headNode_P->AddChild(initialDriveNode);
           headNode_P->AddChild(doCourseNode);
 
           doCourseNode->AddChild(parkingPendingNode);
           doCourseNode->AddChild(drivingNode);
-          
+
           parkingPendingNode->AddChild(parkingSpotSearchNode);
           parkingPendingNode->AddChild(parkingGetReadyNode);
           parkingPendingNode->AddChild(parkingInProgressNode);
@@ -86,36 +86,36 @@ int main(int argc, char** argv) {
         else if(mode == "OBSTACLES") {
           //Declare and initialize all BT nodes for OBSTACLES mode
           BT::SequenceNodeWithMemory* headNode_O = new BT::SequenceNodeWithMemory("headOfTree");
-          NODE_INITIAL_DRIVE::InitialDrive* initialDriveNode = new NODE_INITIAL_DRIVE::InitialDrive("Initial driving");
-          NODE_TRACK_PROPERTY::TrackPropertyNode* trackPropertyNode = new NODE_TRACK_PROPERTY::TrackPropertyNode("Driving", 5);
+          NODES::InitialDrive* initialDriveNode = new NODES::InitialDrive("Initial driving");
+          NODES::TrackPropertyNode* trackPropertyNode = new NODES::TrackPropertyNode("Driving", 5);
 
           BT::SequenceNodeWithMemory* staticLaneBlockingNode = new BT::SequenceNodeWithMemory("Handling static lane-blocking obstacle");
-          NODE_SWITCH_TO_LEFT_LANE::SwitchToLeftLane* staticLaneBlockingLeftswitchNode = new NODE_SWITCH_TO_LEFT_LANE::SwitchToLeftLane("Switching to left lane");
-          NODE_PASS_OBJECT::PassObject* staticLaneBlockingPassingNode = new NODE_PASS_OBJECT::PassObject("Passing...");
-          NODE_SWITCH_TO_RIGHT_LANE::SwitchToRightLane* staticLaneBlockingRightswitchNode = new NODE_SWITCH_TO_RIGHT_LANE::SwitchToRightLane("Switching to right lane");
+          NODES::SwitchToLeftLane* staticLaneBlockingLeftswitchNode = new NODES::SwitchToLeftLane("Switching to left lane");
+          NODES::PassObject* staticLaneBlockingPassingNode = new NODES::PassObject("Passing...");
+          NODES::SwitchToRightLane* staticLaneBlockingRightswitchNode = new NODES::SwitchToRightLane("Switching to right lane");
 
           BT::SequenceNodeWithMemory* barredAreaNode = new BT::SequenceNodeWithMemory("Barred Area");
-          NODE_SWITCH_TO_LEFT_LANE::SwitchToLeftLane* barredAreaLeftswitchNode = new NODE_SWITCH_TO_LEFT_LANE::SwitchToLeftLane("Switching to left lane");
-          NODE_PASS_BARRED_AREA::PassBarredArea* barredAreaPassingNode = new NODE_PASS_BARRED_AREA::PassBarredArea("Passing...");
-          NODE_SWITCH_TO_RIGHT_LANE::SwitchToRightLane* barredAreaRightswitchNode = new NODE_SWITCH_TO_RIGHT_LANE::SwitchToRightLane("Switching to right lane");
+          NODES::SwitchToLeftLane* barredAreaLeftswitchNode = new NODES::SwitchToLeftLane("Switching to left lane");
+          NODES::PassBarredArea* barredAreaPassingNode = new NODES::PassBarredArea("Passing...");
+          NODES::SwitchToRightLane* barredAreaRightswitchNode = new NODES::SwitchToRightLane("Switching to right lane");
 
           BT::SequenceNodeWithMemory* dynamicObjectHandlingNode = new BT::SequenceNodeWithMemory("Handling dynamic obstacle");
-          NODE_FOLLOWING_OBJECT::FollowingObject* followingObjectNode = new NODE_FOLLOWING_OBJECT::FollowingObject("Following...");
+          NODES::FollowingObject* followingObjectNode = new NODES::FollowingObject("Following...");
           BT::SequenceNodeWithMemory* dynamicObjectAvoidingNode = new BT::SequenceNodeWithMemory("Avoiding dynamic obstacle");
-          NODE_SWITCH_TO_LEFT_LANE::SwitchToLeftLane* dynamicObjectLeftswitchNode = new NODE_SWITCH_TO_LEFT_LANE::SwitchToLeftLane("Switching to left lane");
-          NODE_PASS_OBJECT::PassObject* dynamicObjectPassingNode = new NODE_PASS_OBJECT::PassObject("Passing...");
-          NODE_SWITCH_TO_RIGHT_LANE::SwitchToRightLane* dynamicObjectRightswitchNode = new NODE_SWITCH_TO_RIGHT_LANE::SwitchToRightLane("Switching to right lane");
+          NODES::SwitchToLeftLane* dynamicObjectLeftswitchNode = new NODES::SwitchToLeftLane("Switching to left lane");
+          NODES::PassObject* dynamicObjectPassingNode = new NODES::PassObject("Passing...");
+          NODES::SwitchToRightLane* dynamicObjectRightswitchNode = new NODES::SwitchToRightLane("Switching to right lane");
 
           BT::SequenceNodeWithMemory* crosswalkNode = new BT::SequenceNodeWithMemory("Handling Crosswalk");
-          NODE_CROSSWALK_BREAK::CrosswalkBreak* crosswalkBreakNode = new NODE_CROSSWALK_BREAK::CrosswalkBreak("Breaking...");
-          NODE_CROSSWALK_WAIT::CrosswalkWait* crosswalkWaitNode = new NODE_CROSSWALK_WAIT::CrosswalkWait("Waiting...");
+          NODES::CrosswalkBreak* crosswalkBreakNode = new NODES::CrosswalkBreak("Breaking...");
+          NODES::CrosswalkWait* crosswalkWaitNode = new NODES::CrosswalkWait("Waiting...");
 
           BT::FallbackNodeWithMemory* intersectionHandlingNode = new BT::FallbackNodeWithMemory("Handling intersection");
           BT::SequenceNodeWithMemory* intersectionGiveWayNode = new BT::SequenceNodeWithMemory("Giving way");
-          NODE_INTERSECTION_BREAK::IntersectionBreak* intersectionBreakNode = new NODE_INTERSECTION_BREAK::IntersectionBreak("Breaking...");
-          NODE_INTERSECTION_WAIT::IntersectionWait* intersectionWaitNode = new NODE_INTERSECTION_WAIT::IntersectionWait("Waiting...");
-          NODE_INTERSECTION_CROSSING::IntersectionCrossing* intersecionCrossingNode = new NODE_INTERSECTION_CROSSING::IntersectionCrossing("Crossing intersection");
-          NODE_INTERSECTION_CROSSING::IntersectionCrossing* intersectionDirectCrossingNode = new NODE_INTERSECTION_CROSSING::IntersectionCrossing("Crossing intersection without waiting");
+          NODES::IntersectionBreak* intersectionBreakNode = new NODES::IntersectionBreak("Breaking...");
+          NODES::IntersectionWait* intersectionWaitNode = new NODES::IntersectionWait("Waiting...");
+          NODES::IntersectionCrossing* intersecionCrossingNode = new NODES::IntersectionCrossing("Crossing intersection");
+          NODES::IntersectionCrossing* intersectionDirectCrossingNode = new NODES::IntersectionCrossing("Crossing intersection without waiting");
 
           headNode_O->AddChild(initialDriveNode);
           headNode_O->AddChild(trackPropertyNode);

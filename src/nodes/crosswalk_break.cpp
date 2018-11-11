@@ -10,13 +10,13 @@
 #include <nodes/crosswalk_break.h>
 #include <string>
 
-NODE_CROSSWALK_BREAK::CrosswalkBreak::CrosswalkBreak(std::string name):
+NODES::CrosswalkBreak::CrosswalkBreak(std::string name):
   BT::ActionNode(name)
 {
-  thread_ = std::thread(&CrosswalkBreak::WaitForTick, this);
+  thread_ = std::thread(&NODES::CrosswalkBreak::WaitForTick, this);
 }
 
-void CrosswalkBreak::WaitForTick()
+void NODES::CrosswalkBreak::WaitForTick()
 {
     while (true)
     {
@@ -48,7 +48,7 @@ void CrosswalkBreak::WaitForTick()
     }
 }
 
-void CrosswalkBreak::Halt()
+void NODES::CrosswalkBreak::Halt()
 {
     /*HERE THE CODE TO PERFORM WHEN THE ACTION IS HALTED*/
     set_status(BT::HALTED);
