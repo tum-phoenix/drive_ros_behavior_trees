@@ -28,6 +28,7 @@ This table is meant to try and standardize the message contents some nodes send 
 **TODO:** If you know the responsible package for some event, please exchange the (?) with its name.
 
 Note: These lists are way from final; expect changes to be made, specifically regarding something being in the topic or in the service list.
+
 Driving Mode (Parking/Obstacles) | Event  / To be transmitted | Message Content | Proposed source package
 --- | --- | --- | ---
 Both | Start line crossed | "Crossed start line" | drive_ros_image_recognition
@@ -49,6 +50,7 @@ Obstacles | The positions of pedestrians at a crosswalk / Only whether all have 
 
 ## Services needed for info-calls by the BT
 Driving Mode (Parking/Obstacles) | Brief content | srv-file | Proposed source package
+--- | --- | --- | ---
 Both | current vehicle velocity | VelocityService.src | move_base
 
 
