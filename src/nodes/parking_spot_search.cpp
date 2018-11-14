@@ -6,8 +6,11 @@
     Contains: Following the track, lookout for parking spot
 */
 
+#include <ros/ros.h>
 #include <nodes/parking_spot_search.h>
 #include <string>
+
+extern int successfulParkingCount;
 
 NODES::ParkingSpotSearch::ParkingSpotSearch(std::string name) : ActionNode::ActionNode(name)
 {
@@ -33,11 +36,16 @@ void NODES::ParkingSpotSearch::WaitForTick()
         while (get_status() != BT::HALTED && get_status() != BT::SUCCESS)
         {
           if(!RCenabled) {
-            /* General actions */
-            if(!messageProcessed) {
-              if(!latestMessage.command.compare("Parking spot found")) {
-                set_status(BT::SUCCESS);
-                messageProcessed = true;
+            if(successfulParkingCount >= 2) {
+              set_status(BT::FAILURE);
+            }
+            else {
+              /* General actions */
+              if(!messageProcessed) {
+                if(!latestMessage.command.compare("Parking spot found")) {
+                  set_status(BT::SUCCESS);
+                  messageProcessed = true;
+                }
               }
             }
           }

@@ -46,6 +46,10 @@ void NODES::Drive::WaitForTick()
                 set_status(BT::SUCCESS);
                 messageProcessed = true;
               }
+              else if(!latestMessage.command.compare("Crossed start line")) {
+                set_status(BT::FAILURE); //Cancels the normal driving routine to (re-) enter parking mode if required.
+                messageProcessed = true;
+              }
             }
           }
           else {

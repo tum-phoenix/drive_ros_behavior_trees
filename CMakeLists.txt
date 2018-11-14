@@ -9,10 +9,8 @@ add_compile_options(-std=c++11)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
   roscpp
+  rospy
   behavior_tree_core
-  genmsg
-  actionlib_msgs
-  actionlib
   message_generation
   roslib
   std_msgs
@@ -59,11 +57,10 @@ add_message_files(
 )
 
 ## Generate services in the 'srv' folder
-# add_service_files(
-#   FILES
-#   Service1.srv
-#   Service2.srv
-# )
+ add_service_files(
+   FILES
+   VelocityService.srv
+ )
 
 ## Generate actions in the 'action' folder
 # add_action_files(
@@ -206,6 +203,7 @@ include_directories(
 
 add_executable(BehaviorTree src/tree/Tree.cpp
   src/nodes/initial_drive.cpp
+  src/nodes/sequence_repeat_node.cpp
   src/nodes/parking_getready.cpp
   src/nodes/parking_in_progress.cpp
   src/nodes/parking_reverse.cpp

@@ -35,7 +35,15 @@ void NODES::IntersectionBreak::WaitForTick()
             /* General actions */
             if(!messageProcessed) {
               /* Action when message is received */
-              messageProcessed = true;
+              //TODO: Send command to stop the car!!!
+              //This assumes the car is always in an appropriate position on the lane while looking for a parking spot.
+              drive_ros_behavior_trees::VelocityService vs;
+              do {
+                if(!velocityClient.call(vs)) ROS_ERROR("Velocity Service call failed.");
+                std::this_thread::sleep_for(std::chrono::milliseconds(10));
+              }
+              while(vs.response.velocity != 0); //Maybe use some tolerance value?
+              set_status(BT::SUCCESS);
             }
           }
           else {

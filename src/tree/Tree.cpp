@@ -5,8 +5,10 @@
 #include <vector>
 
 #include "drive_ros_behavior_trees/BehaviorTreeMessage.h"
+#include "drive_ros_behavior_trees/VelocityService.h"
 
 #include <nodes/initial_drive.h>
+#include <nodes/sequence_repeat_node.h>
 #include <nodes/parking_spot_search.h>
 #include <nodes/parking_getready.h>
 #include <nodes/parking_in_progress.h>
@@ -26,10 +28,14 @@
 #include <nodes/intersection_wait.h>
 #include <nodes/intersection_crossing.h>
 
+ros::ServiceClient velocityClient;
+
 drive_ros_behavior_trees::BehaviorTreeMessage latestMessage;
 bool messageProcessed;
 bool RCenabled;
 bool TPnodesActive[5];
+
+int successfulParkingCount = 0;
 
 void subscriberCallback(const drive_ros_behavior_trees::BehaviorTreeMessage& msg) {
   latestMessage = msg;
@@ -38,11 +44,14 @@ void subscriberCallback(const drive_ros_behavior_trees::BehaviorTreeMessage& msg
 
 int main(int argc, char** argv) {
     ros::init(argc, argv, "BehaviorTree");
-    ros::NodeHandle n;
-    std::string mode;
-    n.getParam("behavior_tree/mode", mode);
+    ros::NodeHandle nodeHandle;
 
-    ros::Subscriber sub = n.subscribe("behavior_tree_topic", 32, subscriberCallback);
+    std::string mode;
+    nodeHandle.getParam("behavior_tree/mode", mode);
+
+    velocityClient = nodeHandle.serviceClient<drive_ros_behavior_trees::VelocityService>("velocity_service");
+
+    ros::Subscriber sub = nodeHandle.subscribe("behavior_tree_topic", 32, subscriberCallback);
     messageProcessed = true;
 
     RCenabled = false;
@@ -54,7 +63,7 @@ int main(int argc, char** argv) {
           //Declare and initialize all BT nodes for PARKING mode
           BT::SequenceNodeWithMemory* headNode_P = new BT::SequenceNodeWithMemory("headOfTree");
           NODES::InitialDrive* initialDriveNode = new NODES::InitialDrive("Initial driving");
-          BT::SequenceNodeWithMemory* doCourseNode = new BT::SequenceNodeWithMemory("Doing course...");
+          NODES::SequenceRepeatNode* doCourseNode = new NODES::SequenceRepeatNode("Doing course...");
 
           BT::SequenceNodeWithMemory* parkingPendingNode = new BT::SequenceNodeWithMemory("Parking...");
           NODES::ParkingSpotSearch* parkingSpotSearchNode = new NODES::ParkingSpotSearch("Parking spot search");
@@ -62,7 +71,7 @@ int main(int argc, char** argv) {
           NODES::ParkingInProgress* parkingInProgressNode = new NODES::ParkingInProgress("Parking in progress");
           NODES::ParkingReverse* parkingReverseNode = new NODES::ParkingReverse("Reversing parking");
 
-          BT::SequenceNodeWithMemory* drivingNode = new BT::SequenceNodeWithMemory("Driving...");
+          NODES::SequenceRepeatNode* drivingNode = new NODES::SequenceRepeatNode("Driving...");
           NODES::Drive* standardDrivingNode = new NODES::Drive("On normal track");
           NODES::CrossIntersection* intersectionNode = new NODES::CrossIntersection("Crossing intersection");
 

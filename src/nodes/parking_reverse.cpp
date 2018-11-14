@@ -9,6 +9,8 @@
 #include <nodes/parking_reverse.h>
 #include <string>
 
+extern int successfulParkingCount;
+
 NODES::ParkingReverse::ParkingReverse(std::string name) : ActionNode::ActionNode(name)
 {
     thread_ = std::thread(&NODES::ParkingReverse::WaitForTick, this);
@@ -37,6 +39,9 @@ void NODES::ParkingReverse::WaitForTick()
               /* Action when message is received */
               messageProcessed = true;
             }
+
+            successfulParkingCount++;
+            set_status(BT::SUCCESS);
           }
           else {
             //Handle RC mode
