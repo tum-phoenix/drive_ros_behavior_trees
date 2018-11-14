@@ -27,13 +27,13 @@ This table is meant to try and standardize the message contents some nodes send 
 
 **TODO:** If you know the responsible package for some event, please exchange the (?) with its name.
 
+Note: These lists are way from final; expect changes to be made, specifically regarding something being in the topic or in the service list.
+
 Driving Mode (Parking/Obstacles) | Event  / To be transmitted | Message Content | Proposed source package
 --- | --- | --- | ---
-Both | Car stopped (velocity=0) | "Car stopped" |  move_base
+Both | RC mode enabeled/disabeled | "Toggle RC mode" | remote control receiver...
 Both | Start line crossed | "Crossed start line" | drive_ros_image_recognition
 Parking | Fitting parking spot found | "Parking spot found" | (?) Lidar...
-Parking | Ready to start parking (velocity=0, correctly positioned) | "Ready for parking" | (?)
-Parking | Parking stopped successfully (->car is in parking spot) | "Parking successful" | move_base
 Parking | Car is on track again (reverse parking successful) | "Parking process completed" | move_base
 Parking | Intersection immediately upfront | "Intersection detected" | drive_ros_marker_detection
 Parking | Intersection is over, lane markings left and right directly in front of the car | "Intersection ended" | (?)
@@ -46,6 +46,12 @@ Obstacles | Car switched to left lane, is on track | "Switched to left lane" | C
 Obstacles | Car switched to right lane, is on track | "Switched to right lane" | CommonRoad
 Obstacles | The relative position of the obstacle to the right (while on left lane, avoiding it) | "Object/Barred area on the right", (int) position | drive_ros_marker_detection
 Obstacles | The positions of pedestrians at a crosswalk / Only whether all have crossed the street? | *not clear yet, message format!* | (?)
+
+## Services needed for info-calls by the BT
+Driving Mode (Parking/Obstacles) | Brief content | srv-file | Proposed source package
+--- | --- | --- | ---
+Both | current vehicle velocity | VelocityService.src | move_base
+
 
 Annotation: "Immediately upfront" always means the point of time when acting is required. E.g. when a crosswalk is detected, the car may still drive towards it, but when it's immediately upfront, breaking is required.
 
