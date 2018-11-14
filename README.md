@@ -31,10 +31,9 @@ Note: These lists are way from final; expect changes to be made, specifically re
 
 Driving Mode (Parking/Obstacles) | Event  / To be transmitted | Message Content | Proposed source package
 --- | --- | --- | ---
+Both | RC mode enabeled/disabeled | "Toggle RC mode" | remote control receiver...
 Both | Start line crossed | "Crossed start line" | drive_ros_image_recognition
 Parking | Fitting parking spot found | "Parking spot found" | (?) Lidar...
-Parking | Ready to start parking (velocity=0, correctly positioned) | "Ready for parking" | (?)
-Parking | Parking stopped successfully (->car is in parking spot) | "Parking successful" | move_base
 Parking | Car is on track again (reverse parking successful) | "Parking process completed" | move_base
 Parking | Intersection immediately upfront | "Intersection detected" | drive_ros_marker_detection
 Parking | Intersection is over, lane markings left and right directly in front of the car | "Intersection ended" | (?)
