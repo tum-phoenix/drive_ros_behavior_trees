@@ -7,6 +7,7 @@
 */
 
 #include <ros/ros.h>
+#include <RCMode.h>
 #include <nodes/switch_to_left_lane.h>
 #include <string>
 
@@ -41,7 +42,7 @@ void NODES::SwitchToLeftLane::WaitForTick()
             }
           }
           else {
-            //Handle RC mode
+            handleRCMode();
           }
         }
     }

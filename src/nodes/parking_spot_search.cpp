@@ -7,6 +7,7 @@
 */
 
 #include <ros/ros.h>
+#include <RCMode.h>
 #include <nodes/parking_spot_search.h>
 #include <string>
 
@@ -50,7 +51,7 @@ void NODES::ParkingSpotSearch::WaitForTick()
             }
           }
           else {
-            //Handle RC mode
+            handleRCMode();
           }
         }
     }

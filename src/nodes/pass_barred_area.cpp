@@ -7,6 +7,7 @@
 */
 
 #include <ros/ros.h>
+#include <RCMode.h>
 #include <nodes/pass_barred_area.h>
 #include <string>
 
@@ -39,7 +40,7 @@ void NODES::PassBarredArea::WaitForTick()
             }
           }
           else {
-            //Handle RC mode
+            handleRCMode();
           }
         }
     }

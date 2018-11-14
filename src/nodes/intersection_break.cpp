@@ -6,9 +6,14 @@
     Contains: Breaking and following the track.
 */
 
+#include <drive_ros_behavior_trees/VelocityService.h>
+
 #include <ros/ros.h>
+#include <RCMode.h>
 #include <nodes/intersection_break.h>
 #include <string>
+
+extern ros::ServiceClient velocityClient;
 
 NODES::IntersectionBreak::IntersectionBreak(std::string name):
   BT::ActionNode(name)
@@ -47,7 +52,7 @@ void NODES::IntersectionBreak::WaitForTick()
             }
           }
           else {
-            //Handle RC mode
+            handleRCMode();
           }
         }
     }

@@ -7,6 +7,7 @@
 */
 
 #include <ros/ros.h>
+#include <RCMode.h>
 #include <nodes/cross_intersection.h>
 #include <string>
 
@@ -43,7 +44,7 @@ void NODES::CrossIntersection::WaitForTick()
             }
           }
           else {
-            //Handle RC mode
+            handleRCMode();
           }
         }
     }

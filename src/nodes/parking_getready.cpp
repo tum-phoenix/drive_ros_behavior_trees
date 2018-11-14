@@ -7,6 +7,7 @@
 */
 
 #include <ros/ros.h>
+#include <RCMode.h>
 #include "drive_ros_behavior_trees/VelocityService.h"
 
 #include <nodes/parking_getready.h>
@@ -53,7 +54,7 @@ void NODES::ParkingGetready::WaitForTick()
             }
           }
           else {
-            //Handle RC mode
+            handleRCMode();
           }
         }
     }

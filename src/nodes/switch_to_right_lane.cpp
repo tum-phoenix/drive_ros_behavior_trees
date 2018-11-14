@@ -7,6 +7,7 @@
 */
 
 #include <ros/ros.h>
+#include <RCMode.h>
 #include <nodes/switch_to_right_lane.h>
 #include <string>
 
@@ -42,7 +43,7 @@ void NODES::SwitchToRightLane::WaitForTick()
             }
           }
           else {
-            //Handle RC mode
+            handleRCMode();
           }
         }
     }

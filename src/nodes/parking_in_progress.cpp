@@ -7,6 +7,7 @@
 */
 
 #include <ros/ros.h>
+#include <RCMode.h>
 #include <nodes/parking_in_progress.h>
 #include <string>
 
@@ -45,7 +46,7 @@ void NODES::ParkingInProgress::WaitForTick()
             }
           }
           else {
-            //Handle RC mode
+            handleRCMode();
           }
         }
 

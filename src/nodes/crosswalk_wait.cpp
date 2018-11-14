@@ -7,6 +7,7 @@
 */
 
 #include <ros/ros.h>
+#include <RCMode.h>
 #include <nodes/crosswalk_wait.h>
 #include <string>
 
@@ -39,7 +40,7 @@ void NODES::CrosswalkWait::WaitForTick()
             }
           }
           else {
-            //Handle RC mode
+            handleRCMode();
           }
         }
     }

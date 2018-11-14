@@ -202,6 +202,8 @@ include_directories(
 # catkin_add_nosetests(test)
 
 add_executable(BehaviorTree src/tree/Tree.cpp
+  src/tree/RCMode.cpp
+
   src/nodes/initial_drive.cpp
   src/nodes/sequence_repeat_node.cpp
   src/nodes/parking_getready.cpp

@@ -7,6 +7,7 @@
 */
 
 #include <nodes/parking_reverse.h>
+#include <RCMode.h>
 #include <string>
 
 extern int successfulParkingCount;
@@ -44,7 +45,7 @@ void NODES::ParkingReverse::WaitForTick()
             set_status(BT::SUCCESS);
           }
           else {
-            //Handle RC mode
+            handleRCMode();
           }
         }
     }

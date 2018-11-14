@@ -8,6 +8,7 @@
 
 #include <ros/ros.h>
 #include <nodes/initial_drive.h>
+#include <RCMode.h>
 #include <string>
 
 NODES::InitialDrive::InitialDrive(std::string name):
@@ -42,7 +43,7 @@ void NODES::InitialDrive::WaitForTick()
             }
           }
           else {
-            //Handle RC mode
+            handleRCMode();
           }
         }
     }

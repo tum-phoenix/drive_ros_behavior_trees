@@ -8,6 +8,7 @@
 */
 
 #include <nodes/drive.h>
+#include <RCMode.h>
 #include <string>
 
 NODES::Drive::Drive(std::string name):
@@ -53,7 +54,7 @@ void NODES::Drive::WaitForTick()
             }
           }
           else {
-            //Handle RC mode
+            handleRCMode();
           }
         }
     }
