@@ -10,6 +10,14 @@ Basically they are trees organizing the possible states of some machine. They us
 
 All nodes have a a state for themselves (idle, running, success, ...). Of course, a control node can have both control and action nodes as children, while action nodes never have children. For further reading I recommend Chapter 1 of the Manual provided by the library I used (see "Dependencies").
 
+## TODOs to make the BTs work:
+- [ ] Implement the actions resulting from the current state (messages to trajectory planner etc.)
+- [ ] Implement handling of the RC mode (forwarding remote control data to motor controls)
+- [ ] Research best way to "manually" set the state of the tree, e.g. after exiting RC mode
+- [ ] Implement state reinitialization, e.g. after exiting RC mode
+- [ ] Implement publishers for below listed messages in the behavior_tree_topic
+- [ ] Testing
+
 ## Current functions and abilities of the trees
 For now, the BT models are capable of
 - Displaying the current status of the car
