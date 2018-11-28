@@ -1,4 +1,5 @@
 # Behavior Trees
+**Warning!!! This package is deprecated! For the new version, search for 'drive_ros_custom_behavior_trees'!**
 Behavior trees implementation of the drive team. 
 
 Still work in progress!!
